@@ -21,7 +21,7 @@ namespace BattleShip.UI
             int y = 0;
             bool ValidX = false;
             bool ValidY = false;
-            while (!ValidX && !ValidY)
+            while (!ValidX || !ValidY)
             {
                 switch (InputCoordinate.Substring(0, 1).ToUpper())
                 {
@@ -92,6 +92,9 @@ namespace BattleShip.UI
 
             string Player1Name = "";
             string Player2Name = "";
+
+            Board Player1Board = new Board();
+            Board Player2Board = new Board();
 
             while (WantToPlay == false)
             {
@@ -220,25 +223,40 @@ namespace BattleShip.UI
 
                                       "so don't let it fall off the ocean!");
 
-                    string destroyerPlayer1String = Console.ReadLine();
-                    Coordinate destroyerPlayer1Coordinate = Convert(destroyerPlayer1String);
+                    string destroyerP1CoordString = Console.ReadLine();
+                    Coordinate destroyerP1BaseCoord = Convert(destroyerP1CoordString);
 
+                    PlaceShipRequest RequestVarDestroyer = new PlaceShipRequest();
+                    RequestVarDestroyer.Coordinate = destroyerP1BaseCoord;
+                    RequestVarDestroyer.ShipType = ShipType.Destroyer;
 
                     Console.WriteLine("Now choose a direction to place your DESTROYER:\n" +
 
                                       "(U)p, (D)own, (L)eft, or (R)ight...");
 
-                    string destroyerPlayer1Direction = Console.ReadLine();
+                    string destroyerP1Direction = Console.ReadLine().ToUpper();
 
+                    //switch (destroyerP1Direction)
 
+                    switch (destroyerP1Direction)
+                    {
+                        case "R":
+                            RequestVarDestroyer.Direction = ShipDirection.Right;
+                            break;
+                        case "L":
+                            RequestVarDestroyer.Direction = ShipDirection.Left;
+                            break;
+                        case "U":
+                            RequestVarDestroyer.Direction = ShipDirection.Up;
+                            break;
+                        case "D":
+                            RequestVarDestroyer.Direction = ShipDirection.Down;
+                            break;
 
+                    }
 
-
-
-
-
+                    Player1Board.PlaceShip(RequestVarDestroyer);
                 }
-
 
 
                 //Exiting Option
