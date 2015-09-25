@@ -1,4 +1,6 @@
-﻿namespace BattleShip.BLL.Requests
+﻿using System;
+
+namespace BattleShip.BLL.Requests
 {
     public class Coordinate
     {

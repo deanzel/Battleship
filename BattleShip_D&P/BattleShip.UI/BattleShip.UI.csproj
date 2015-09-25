@@ -41,11 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameWorkFlow.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="PromptName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BattleShip.BLL\BattleShip.BLL.csproj">
+      <Project>{f8b43da0-2853-4b79-8bfe-b25c658c4a9b}</Project>
+      <Name>BattleShip.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Battleship.Tests\Battleship.Tests.csproj">
+      <Project>{997627a8-9cb3-4615-943a-1d9b2db036b2}</Project>
+      <Name>Battleship.Tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
