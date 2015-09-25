@@ -18,46 +18,67 @@ namespace BattleShip.UI
         public static Coordinate Convert(string InputCoordinate)
         {
             int x = 0;
-            int y;
-            
-            switch (InputCoordinate.Substring(0, 1).ToUpper())
+            int y = 0;
+            bool ValidX = false;
+            bool ValidY = false;
+            while (!ValidX && !ValidY)
             {
-                case "A":
-                    x = 1;
-                    break;
-                case "B":
-                    x = 2;
-                    break;
-                case "C":
-                    x = 3;
-                    break;
-                case "D":
-                    x = 4;
-                    break;
-                case "E":
-                    x = 5;
-                    break;
-                case "F":
-                    x = 6;
-                    break;
-                case "G":
-                    x = 7;
-                    break;
-                case "H":
-                    x = 8;
-                    break;
-                case "I":
-                    x = 9;
-                    break;
-                case "J":
-                    x = 10;
-                    break;
+                switch (InputCoordinate.Substring(0, 1).ToUpper())
+                {
+                    case "A":
+                        x = 1;
+                        ValidX = true;
+                        break;
+                    case "B":
+                        x = 2;
+                        ValidX = true;
+                        break;
+                    case "C":
+                        x = 3;
+                        ValidX = true;
+                        break;
+                    case "D":
+                        x = 4;
+                        ValidX = true;
+                        break;
+                    case "E":
+                        x = 5;
+                        ValidX = true;
+                        break;
+                    case "F":
+                        x = 6;
+                        ValidX = true;
+                        break;
+                    case "G":
+                        x = 7;
+                        ValidX = true;
+                        break;
+                    case "H":
+                        x = 8;
+                        ValidX = true;
+                        break;
+                    case "I":
+                        x = 9;
+                        ValidX = true;
+                        break;
+                    case "J":
+                        x = 10;
+                        ValidX = true;
+                        break;
+                    default:
+                        Console.WriteLine("Sorry,  that was not a valid coordinate...  Please try again.");
+                        InputCoordinate = Console.ReadLine();
+                        break;
+                }
+
+               ValidY = int.TryParse(InputCoordinate.Substring(1), out y);
+                if (y < 1 || y > 10)
+                {
+                    ValidY = false;
+                    Console.WriteLine("Sorry,  that was not a valid coordinate...  Please try again.");
+                    InputCoordinate = Console.ReadLine();
+                }
             }
-
-            y = int.Parse(InputCoordinate.Substring(1));
-
-
-            //Coordinate ConvertedCoordinate = new Coordinate(x, y);
 
             return new Coordinate(x, y);
         }
@@ -65,98 +86,98 @@ namespace BattleShip.UI
 
         private static void Main(string[] args)
         {
-            //Console.WriteLine("Weclome to Battleship!!\nDo you want to play Battleship? Yes (Y) or No (N)?");
-            //string UserResponse = Console.ReadLine().ToUpper();
-            //bool WantToPlay = false;
-          
-            //string Player1Name = "";
-            //string Player2Name = "";
+            Console.WriteLine("Weclome to Battleship!!\nDo you want to play Battleship? Yes (Y) or No (N)?");
+            string UserResponse = Console.ReadLine().ToUpper();
+            bool WantToPlay = false;
 
-            //while (WantToPlay == false)
-            //{
+            string Player1Name = "";
+            string Player2Name = "";
 
-            //    if (UserResponse == "N")
-            //    {
-            //        Console.Clear();
-            //        Console.WriteLine("Goodbye :(");
-            //        Console.ReadLine();
-            //        WantToPlay = true;
-            //    }
+            while (WantToPlay == false)
+            {
 
-            //    if (UserResponse == "Y")
-            //    {
-            //        WantToPlay = true;
+                if (UserResponse == "N")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Goodbye :(");
+                    Console.ReadLine();
+                    WantToPlay = true;
+                }
+
+                if (UserResponse == "Y")
+                {
+                    WantToPlay = true;
 
 
 
                     //PromptName() method
 
 
-                    //bool player1NameOK = false;
-                    //bool player2NameOK = false;
+                    bool player1NameOK = false;
+                    bool player2NameOK = false;
 
 
-                    //Console.Clear();
-                    //Console.WriteLine("Player 1, please enter your desired name.");
-                    //Player1Name = Console.ReadLine();
+                    Console.Clear();
+                    Console.WriteLine("Player 1, please enter your desired name.");
+                    Player1Name = Console.ReadLine();
 
-                    //while (player1NameOK == false)
-                    //{
-                    //    Console.WriteLine("{0} is what we will call Player 1. Continue? Y or N.", Player1Name);
-                    //    string NameResponse1 = Console.ReadLine().ToUpper();
+                    while (player1NameOK == false)
+                    {
+                        Console.WriteLine("{0} is what we will call Player 1. Continue? Y or N.", Player1Name);
+                        string NameResponse1 = Console.ReadLine().ToUpper();
 
-                    //    while (NameResponse1 != "N" && NameResponse1 != "Y")
-                    //    {
-                    //        Console.Clear();
-                    //        Console.WriteLine("Didn't get that. Is {0} what we will call Player 1? Y or N.", Player1Name);
-                    //        NameResponse1 = Console.ReadLine().ToUpper();
-                    //    }
+                        while (NameResponse1 != "N" && NameResponse1 != "Y")
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Didn't get that. Is {0} what we will call Player 1? Y or N.", Player1Name);
+                            NameResponse1 = Console.ReadLine().ToUpper();
+                        }
 
-                    //    while (NameResponse1 == "N")
-                    //    {
-                    //        Console.Clear();
-                    //        Console.WriteLine("Player 1, please enter your new desired name.");
-                    //        Player1Name = Console.ReadLine();
-                    //        Console.WriteLine("{0} is what we will call Player 1. Continue? Y or N.", Player1Name);
-                    //        NameResponse1 = Console.ReadLine().ToUpper();
-                    //    }
+                        while (NameResponse1 == "N")
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Player 1, please enter your new desired name.");
+                            Player1Name = Console.ReadLine();
+                            Console.WriteLine("{0} is what we will call Player 1. Continue? Y or N.", Player1Name);
+                            NameResponse1 = Console.ReadLine().ToUpper();
+                        }
 
-                    //    if (NameResponse1 == "Y")
-                    //    {
-                    //        player1NameOK = true;
-                    //    }
-                    //}
+                        if (NameResponse1 == "Y")
+                        {
+                            player1NameOK = true;
+                        }
+                    }
 
-                    //Console.Clear();
-                    //Console.WriteLine("Player 2, please enter your desired name.");
-                    //Player2Name = Console.ReadLine();
+                    Console.Clear();
+                    Console.WriteLine("Player 2, please enter your desired name.");
+                    Player2Name = Console.ReadLine();
 
-                    //while (player2NameOK == false)
-                    //{
-                    //    Console.WriteLine("{0} is what we will call Player 2. Continue? Y or N.", Player2Name);
-                    //    string NameResponse2 = Console.ReadLine().ToUpper();
+                    while (player2NameOK == false)
+                    {
+                        Console.WriteLine("{0} is what we will call Player 2. Continue? Y or N.", Player2Name);
+                        string NameResponse2 = Console.ReadLine().ToUpper();
 
-                    //    while (NameResponse2 != "N" && NameResponse2 != "Y")
-                    //    {
-                    //        Console.Clear();
-                    //        Console.WriteLine("Didn't get that. Is {0} what we will call Player 2? Y or N.", Player2Name);
-                    //        NameResponse2 = Console.ReadLine().ToUpper();
-                    //    }
+                        while (NameResponse2 != "N" && NameResponse2 != "Y")
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Didn't get that. Is {0} what we will call Player 2? Y or N.", Player2Name);
+                            NameResponse2 = Console.ReadLine().ToUpper();
+                        }
 
-                    //    while (NameResponse2 == "N")
-                    //    {
-                    //        Console.Clear();
-                    //        Console.WriteLine("Player 2, please enter your new desired name.");
-                    //        Player2Name = Console.ReadLine();
-                    //        Console.WriteLine("{0} is what we will call Player 2. Continue? Y or N.", Player2Name);
-                    //        NameResponse2 = Console.ReadLine().ToUpper();
-                    //    }
+                        while (NameResponse2 == "N")
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Player 2, please enter your new desired name.");
+                            Player2Name = Console.ReadLine();
+                            Console.WriteLine("{0} is what we will call Player 2. Continue? Y or N.", Player2Name);
+                            NameResponse2 = Console.ReadLine().ToUpper();
+                        }
 
-                    //    if (NameResponse2 == "Y")
-                    //    {
-                    //        player2NameOK = true;
-                    //    }
-                    //}
+                        if (NameResponse2 == "Y")
+                        {
+                            player2NameOK = true;
+                        }
+                    }
 
 
 
@@ -193,7 +214,7 @@ namespace BattleShip.UI
 
                     Console.ReadLine();
 
-                    Console.WriteLine("{0}, Get ready to place your DESTROYER...", "Dean");
+                    Console.WriteLine("{0}, Get ready to place your DESTROYER...", Player1Name);
 
                     Console.WriteLine("Choose a beginning coordinate, and remember, it is a 10x10 grid,\n" +
 
@@ -221,14 +242,17 @@ namespace BattleShip.UI
 
 
                 //Exiting Option
-                //else
+                else
 
-                //{
-                //    Console.Clear();
-                //    Console.WriteLine("Invalid Reponse. Do you want to play Battleship? Type Y or N.");
-                //    UserResponse = Console.ReadLine();
+                {
+                    Console.Clear();
+                    Console.WriteLine("Invalid Reponse. Do you want to play Battleship? Type Y or N.");
+                    UserResponse = Console.ReadLine();
                 }
             }
+        }
+    }
+}
 
         
     
