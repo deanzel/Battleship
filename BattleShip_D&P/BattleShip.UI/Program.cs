@@ -210,18 +210,18 @@ namespace BattleShip.UI
 
                     {
 
-                        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"
+                        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
 
                     };
 
 
-                    Console.WriteLine("\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\n\n");
+                    Console.WriteLine("\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n");
 
                     for (int i = 0; i < 10; i++)
 
                     {
 
-                        Console.WriteLine("{0}\t _|\t _|\t _|\t _|\t _|\t _|\t _|\t _|\t _|\t _|\n\n", yaxis[i]);
+                        Console.WriteLine("{0}\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\n", yaxis[i]);
 
                     }
 
@@ -422,7 +422,446 @@ namespace BattleShip.UI
                     Console.WriteLine("Congratulations, {0}! You have placed your Cruiser. Press enter to continue...", Player1Name);
                     Console.ReadLine();
 
-                    
+                    //P1 Battleship
+
+                    ShipPlacement battleship1IsValid = new ShipPlacement();
+                    do
+                    {
+
+                        Console.Clear();
+                        //Display array of ships
+                        Console.WriteLine("{0}, get ready to place your BATTLESHIP (4 coordinates)", Player1Name);
+                        Console.WriteLine("First, choose an initial coordinate (alphanumeric) within the 10x10 grid for your ship.\nRemember that ships cannot overlap!!!\nWe will ask for the direction/orientation of the ship in the next step.");
+
+                        string battleshipP1CoordString = Console.ReadLine();
+                        Coordinate battleshipP1BaseCoord = Convert(battleshipP1CoordString);
+
+                        PlaceShipRequest requestVarBattleship1 = new PlaceShipRequest();
+                        requestVarBattleship1.Coordinate = battleshipP1BaseCoord;
+                        requestVarBattleship1.ShipType = ShipType.Battleship;
+
+                        Console.WriteLine("{0}, now choose a direction to place your BATTLESHIP (4 coordinates):\n" +
+
+                                          "(U)p, (D)own, (L)eft, or (R)ight.", Player1Name);
+
+                        bool validBattleship1Direction = false;
+                        string battleshipP1Direction = Console.ReadLine().ToUpper();
+                        while (!validBattleship1Direction)
+                        {
+                            switch (battleshipP1Direction)
+                            {
+                                case "R":
+                                    requestVarBattleship1.Direction = ShipDirection.Right;
+                                    validBattleship1Direction = true;
+                                    break;
+                                case "L":
+                                    requestVarBattleship1.Direction = ShipDirection.Left;
+                                    validBattleship1Direction = true;
+                                    break;
+                                case "U":
+                                    requestVarBattleship1.Direction = ShipDirection.Up;
+                                    validBattleship1Direction = true;
+                                    break;
+                                case "D":
+                                    requestVarBattleship1.Direction = ShipDirection.Down;
+                                    validBattleship1Direction = true;
+                                    break;
+                                default:
+                                    Console.WriteLine(
+                                        "That is not a valid direction. Please choose (U)p, (D)own, (L)eft or (R)ight.");
+                                    battleshipP1Direction = Console.ReadLine().ToUpper();
+                                    break;
+                            }
+                        }
+
+                        battleship1IsValid = Player1Board.PlaceShip(requestVarBattleship1);
+                        Console.WriteLine(battleship1IsValid);
+                        Console.ReadLine();
+                    } while (battleship1IsValid != ShipPlacement.Ok);
+
+                    Console.WriteLine("Congratulations, {0}! You have placed your Battleship. Press enter to continue...", Player1Name);
+                    Console.ReadLine();
+
+                    //End P1 Battleship
+
+                    //P1 Carrier
+
+                    ShipPlacement carrier1IsValid = new ShipPlacement();
+                    do
+                    {
+
+                        Console.Clear();
+                        //Display array of ships
+                        Console.WriteLine("{0}, get ready to place your CARRIER (5 coordinates)", Player1Name);
+                        Console.WriteLine("First, choose an initial coordinate (alphanumeric) within the 10x10 grid for your ship.\nRemember that ships cannot overlap!!!\nWe will ask for the direction/orientation of the ship in the next step.");
+
+                        string carrierP1CoordString = Console.ReadLine();
+                        Coordinate carrierP1BaseCoord = Convert(carrierP1CoordString);
+
+                        PlaceShipRequest requestVarCarrier1 = new PlaceShipRequest();
+                        requestVarCarrier1.Coordinate = carrierP1BaseCoord;
+                        requestVarCarrier1.ShipType = ShipType.Carrier;
+
+                        Console.WriteLine("{0}, now choose a direction to place your CARRIER (5 coordinates):\n" +
+
+                                          "(U)p, (D)own, (L)eft, or (R)ight.", Player1Name);
+
+                        bool validCarrier1Direction = false;
+                        string carrierP1Direction = Console.ReadLine().ToUpper();
+                        while (!validCarrier1Direction)
+                        {
+                            switch (carrierP1Direction)
+                            {
+                                case "R":
+                                    requestVarCarrier1.Direction = ShipDirection.Right;
+                                    validCarrier1Direction = true;
+                                    break;
+                                case "L":
+                                    requestVarCarrier1.Direction = ShipDirection.Left;
+                                    validCarrier1Direction = true;
+                                    break;
+                                case "U":
+                                    requestVarCarrier1.Direction = ShipDirection.Up;
+                                    validCarrier1Direction = true;
+                                    break;
+                                case "D":
+                                    requestVarCarrier1.Direction = ShipDirection.Down;
+                                    validCarrier1Direction = true;
+                                    break;
+                                default:
+                                    Console.WriteLine(
+                                        "That is not a valid direction. Please choose (U)p, (D)own, (L)eft or (R)ight.");
+                                    carrierP1Direction = Console.ReadLine().ToUpper();
+                                    break;
+                            }
+                        }
+
+                        carrier1IsValid = Player1Board.PlaceShip(requestVarCarrier1);
+                        Console.WriteLine(carrier1IsValid);
+                        Console.ReadLine();
+                    } while (carrier1IsValid != ShipPlacement.Ok);
+
+                    Console.WriteLine("Congratulations, {0}! You have placed your Carrier. Press enter to continue...", Player1Name);
+                    Console.ReadLine();
+
+                    //End P1 Carrier
+
+                    //P2 Destroyer
+
+                    ShipPlacement destroyer2IsValid = new ShipPlacement();
+
+                    do
+                    {
+                        Console.Clear();
+                        Console.WriteLine("{0}, get ready to place your DESTROYER (2 coordinates)", Player2Name);
+                        Console.WriteLine(
+                            "First, choose an initial coordinate (alphanumeric) within the 10x10 grid for your ship.\nWe will ask for the direction/orientation of the ship in the next step.");
+
+                        string destroyerP2CoordString = Console.ReadLine();
+                        Coordinate destroyerP2BaseCoord = Convert(destroyerP2CoordString);
+
+                        PlaceShipRequest requestVarDestroyer2 = new PlaceShipRequest();
+                        requestVarDestroyer2.Coordinate = destroyerP2BaseCoord;
+                        requestVarDestroyer2.ShipType = ShipType.Destroyer;
+
+                        Console.WriteLine("{0}, now choose a direction to place your DESTROYER (2 coordinates):\n" +
+
+                                          "(U)p, (D)own, (L)eft, or (R)ight.", Player2Name);
+
+                        bool validDestroyer2Direction = false;
+
+                        string destroyerP2Direction = Console.ReadLine().ToUpper();
+                        while (!validDestroyer2Direction)
+                        {
+                            switch (destroyerP2Direction)
+                            {
+                                case "R":
+                                    requestVarDestroyer2.Direction = ShipDirection.Right;
+                                    validDestroyer2Direction = true;
+                                    break;
+                                case "L":
+                                    requestVarDestroyer2.Direction = ShipDirection.Left;
+                                    validDestroyer2Direction = true;
+                                    break;
+                                case "U":
+                                    requestVarDestroyer2.Direction = ShipDirection.Up;
+                                    validDestroyer2Direction = true;
+                                    break;
+                                case "D":
+                                    requestVarDestroyer2.Direction = ShipDirection.Down;
+                                    validDestroyer2Direction = true;
+                                    break;
+                                default:
+                                    Console.WriteLine(
+                                        "That is not a valid direction. Please choose (U)p, (D)own, (L)eft or (R)ight.");
+                                    destroyerP2Direction = Console.ReadLine().ToUpper();
+                                    break;
+                            }
+                        }
+
+
+
+
+                        destroyer2IsValid = Player2Board.PlaceShip(requestVarDestroyer2);
+                        Console.WriteLine(destroyer2IsValid);
+                        Console.ReadLine();
+                    } while (destroyer2IsValid != ShipPlacement.Ok);
+
+                    Console.WriteLine("Congratulations, {0}! You have placed your Destroyer. Press enter to continue...", Player2Name);
+                    Console.ReadLine();
+
+                    //End P2 Destroyer
+
+                    //P2 Submarine
+
+                    ShipPlacement sub2IsValid = new ShipPlacement();
+                    do
+                    {
+
+                        Console.Clear();
+                        //Display array of ships
+                        Console.WriteLine("{0}, get ready to place your SUBMARINE (3 coordinates)", Player2Name);
+                        Console.WriteLine("First, choose an initial coordinate (alphanumeric) within the 10x10 grid for your ship.\nRemember that ships cannot overlap!!!\nWe will ask for the direction/orientation of the ship in the next step.");
+
+                        string subP2CoordString = Console.ReadLine();
+                        Coordinate subP2BaseCoord = Convert(subP2CoordString);
+
+                        PlaceShipRequest requestVarSub2 = new PlaceShipRequest();
+                        requestVarSub2.Coordinate = subP2BaseCoord;
+                        requestVarSub2.ShipType = ShipType.Submarine;
+
+                        Console.WriteLine("{0}, now choose a direction to place your SUBMARINE (3 coordinates):\n" +
+
+                                          "(U)p, (D)own, (L)eft, or (R)ight.", Player2Name);
+
+                        bool validSub2Direction = false;
+                        string subP2Direction = Console.ReadLine().ToUpper();
+                        while (!validSub2Direction)
+                        {
+                            switch (subP2Direction)
+                            {
+                                case "R":
+                                    requestVarSub2.Direction = ShipDirection.Right;
+                                    validSub2Direction = true;
+                                    break;
+                                case "L":
+                                    requestVarSub2.Direction = ShipDirection.Left;
+                                    validSub2Direction = true;
+                                    break;
+                                case "U":
+                                    requestVarSub2.Direction = ShipDirection.Up;
+                                    validSub2Direction = true;
+                                    break;
+                                case "D":
+                                    requestVarSub2.Direction = ShipDirection.Down;
+                                    validSub2Direction = true;
+                                    break;
+                                default:
+                                    Console.WriteLine(
+                                        "That is not a valid direction. Please choose (U)p, (D)own, (L)eft or (R)ight.");
+                                    subP2Direction = Console.ReadLine().ToUpper();
+                                    break;
+                            }
+                        }
+
+                        sub2IsValid = Player2Board.PlaceShip(requestVarSub2);
+                        Console.WriteLine(sub2IsValid);
+                        Console.ReadLine();
+                    } while (sub2IsValid != ShipPlacement.Ok);
+
+                    Console.WriteLine("Congratulations, {0}! You have placed your Submarine. Press enter to continue...", Player2Name);
+                    Console.ReadLine();
+
+                    //End P2 Submarine
+
+                    //P2 Cruiser
+
+                    ShipPlacement cruiser2IsValid = new ShipPlacement();
+                    do
+                    {
+                        Console.Clear();
+                        //Display array of ships
+                        Console.WriteLine("{0}, get ready to place your CRUISER (3 coordinates)", Player2Name);
+                        Console.WriteLine("First, choose an initial coordinate (alphanumeric) within the 10x10 grid for your ship." +
+                                          "\nRemember that ships cannot overlap!!!" +
+                                          "\nWe will ask for the direction/orientation of the ship in the next step.");
+
+                        string cruiserP2CoordString = Console.ReadLine();
+                        Coordinate cruiserP2BaseCoord = Convert(cruiserP2CoordString);
+
+                        PlaceShipRequest requestVarCruiser2 = new PlaceShipRequest();
+                        requestVarCruiser2.Coordinate = cruiserP2BaseCoord;
+                        requestVarCruiser2.ShipType = ShipType.Cruiser;
+
+                        Console.WriteLine("{0}, now choose a direction to place your CRUISER (3 coordinates):\n" +
+
+                                          "(U)p, (D)own, (L)eft, or (R)ight.", Player2Name);
+
+                        bool validCruiser2Direction = false;
+                        string cruiserP2Direction = Console.ReadLine().ToUpper();
+                        while (!validCruiser2Direction)
+                        {
+                            switch (cruiserP2Direction)
+                            {
+                                case "R":
+                                    requestVarCruiser2.Direction = ShipDirection.Right;
+                                    validCruiser2Direction = true;
+                                    break;
+                                case "L":
+                                    requestVarCruiser2.Direction = ShipDirection.Left;
+                                    validCruiser2Direction = true;
+                                    break;
+                                case "U":
+                                    requestVarCruiser2.Direction = ShipDirection.Up;
+                                    validCruiser2Direction = true;
+                                    break;
+                                case "D":
+                                    requestVarCruiser2.Direction = ShipDirection.Down;
+                                    validCruiser2Direction = true;
+                                    break;
+                                default:
+                                    Console.WriteLine(
+                                        "That is not a valid direction. Please choose (U)p, (D)own, (L)eft or (R)ight.");
+                                    cruiserP2Direction = Console.ReadLine().ToUpper();
+                                    break;
+                            }
+                        }
+
+
+                        cruiser2IsValid = Player2Board.PlaceShip(requestVarCruiser2);
+                        Console.WriteLine(cruiser2IsValid);
+                        Console.ReadLine();
+                    } while (cruiser2IsValid != ShipPlacement.Ok);
+
+                    Console.WriteLine("Congratulations, {0}! You have placed your Cruiser. Press enter to continue...", Player2Name);
+                    Console.ReadLine();
+
+                    //End P2 Cruiser
+
+                    //P2 Battleship
+
+                    ShipPlacement battleship2IsValid = new ShipPlacement();
+                    do
+                    {
+
+                        Console.Clear();
+                        //Display array of ships
+                        Console.WriteLine("{0}, get ready to place your BATTLESHIP (4 coordinates)", Player2Name);
+                        Console.WriteLine("First, choose an initial coordinate (alphanumeric) within the 10x10 grid for your ship.\nRemember that ships cannot overlap!!!\nWe will ask for the direction/orientation of the ship in the next step.");
+
+                        string battleshipP2CoordString = Console.ReadLine();
+                        Coordinate battleshipP2BaseCoord = Convert(battleshipP2CoordString);
+
+                        PlaceShipRequest requestVarBattleship2 = new PlaceShipRequest();
+                        requestVarBattleship2.Coordinate = battleshipP2BaseCoord;
+                        requestVarBattleship2.ShipType = ShipType.Battleship;
+
+                        Console.WriteLine("{0}, now choose a direction to place your BATTLESHIP (4 coordinates):\n" +
+
+                                          "(U)p, (D)own, (L)eft, or (R)ight.", Player2Name);
+
+                        bool validBattleship2Direction = false;
+                        string battleshipP2Direction = Console.ReadLine().ToUpper();
+                        while (!validBattleship2Direction)
+                        {
+                            switch (battleshipP2Direction)
+                            {
+                                case "R":
+                                    requestVarBattleship2.Direction = ShipDirection.Right;
+                                    validBattleship2Direction = true;
+                                    break;
+                                case "L":
+                                    requestVarBattleship2.Direction = ShipDirection.Left;
+                                    validBattleship2Direction = true;
+                                    break;
+                                case "U":
+                                    requestVarBattleship2.Direction = ShipDirection.Up;
+                                    validBattleship2Direction = true;
+                                    break;
+                                case "D":
+                                    requestVarBattleship2.Direction = ShipDirection.Down;
+                                    validBattleship2Direction = true;
+                                    break;
+                                default:
+                                    Console.WriteLine(
+                                        "That is not a valid direction. Please choose (U)p, (D)own, (L)eft or (R)ight.");
+                                    battleshipP2Direction = Console.ReadLine().ToUpper();
+                                    break;
+                            }
+                        }
+
+                        battleship2IsValid = Player2Board.PlaceShip(requestVarBattleship2);
+                        Console.WriteLine(battleship2IsValid);
+                        Console.ReadLine();
+                    } while (battleship2IsValid != ShipPlacement.Ok);
+
+                    Console.WriteLine("Congratulations, {0}! You have placed your Battleship. Press enter to continue...", Player2Name);
+                    Console.ReadLine();
+
+                    //End P2 Battleship
+
+                    //P2 Carrier
+
+                    ShipPlacement carrier2IsValid = new ShipPlacement();
+                    do
+                    {
+
+                        Console.Clear();
+                        //Display array of ships
+                        Console.WriteLine("{0}, get ready to place your CARRIER (5 coordinates)", Player2Name);
+                        Console.WriteLine("First, choose an initial coordinate (alphanumeric) within the 10x10 grid for your ship.\nRemember that ships cannot overlap!!!\nWe will ask for the direction/orientation of the ship in the next step.");
+
+                        string carrierP2CoordString = Console.ReadLine();
+                        Coordinate carrierP2BaseCoord = Convert(carrierP2CoordString);
+
+                        PlaceShipRequest requestVarCarrier2 = new PlaceShipRequest();
+                        requestVarCarrier2.Coordinate = carrierP2BaseCoord;
+                        requestVarCarrier2.ShipType = ShipType.Carrier;
+
+                        Console.WriteLine("{0}, now choose a direction to place your CARRIER (5 coordinates):\n" +
+
+                                          "(U)p, (D)own, (L)eft, or (R)ight.", Player2Name);
+
+                        bool validCarrier2Direction = false;
+                        string carrierP2Direction = Console.ReadLine().ToUpper();
+                        while (!validCarrier2Direction)
+                        {
+                            switch (carrierP2Direction)
+                            {
+                                case "R":
+                                    requestVarCarrier2.Direction = ShipDirection.Right;
+                                    validCarrier2Direction = true;
+                                    break;
+                                case "L":
+                                    requestVarCarrier2.Direction = ShipDirection.Left;
+                                    validCarrier2Direction = true;
+                                    break;
+                                case "U":
+                                    requestVarCarrier2.Direction = ShipDirection.Up;
+                                    validCarrier2Direction = true;
+                                    break;
+                                case "D":
+                                    requestVarCarrier2.Direction = ShipDirection.Down;
+                                    validCarrier2Direction = true;
+                                    break;
+                                default:
+                                    Console.WriteLine(
+                                        "That is not a valid direction. Please choose (U)p, (D)own, (L)eft or (R)ight.");
+                                    carrierP2Direction = Console.ReadLine().ToUpper();
+                                    break;
+                            }
+                        }
+
+                        carrier2IsValid = Player2Board.PlaceShip(requestVarCarrier2);
+                        Console.WriteLine(carrier2IsValid);
+                        Console.ReadLine();
+                    } while (carrier2IsValid != ShipPlacement.Ok);
+
+                    Console.WriteLine("Congratulations, {0}! You have placed your Carrier. Press enter to continue...", Player2Name);
+                    Console.ReadLine();
+
+                    //End P2 Carrier
+
                 }
 
                 
