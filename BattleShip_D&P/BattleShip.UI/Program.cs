@@ -21,8 +21,15 @@ namespace BattleShip.UI
             int y = 0;
             bool ValidX = false;
             bool ValidY = false;
+            
+            
             while (!ValidX || !ValidY)
             {
+                while (InputCoordinate == "")
+                {
+                    Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
+                    InputCoordinate = Console.ReadLine();
+                }
                 switch (InputCoordinate.Substring(0, 1).ToUpper())
                 {
                     case "A":
@@ -70,8 +77,13 @@ namespace BattleShip.UI
                         InputCoordinate = Console.ReadLine();
                         break;
                 }
-
-               ValidY = int.TryParse(InputCoordinate.Substring(1), out y);
+                while (InputCoordinate == "")
+                {
+                    Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
+                    InputCoordinate = Console.ReadLine();
+                }
+                
+                ValidY = int.TryParse(InputCoordinate.Substring(1), out y);
                 if (y < 1 || y > 10)
                 {
                     ValidY = false;
