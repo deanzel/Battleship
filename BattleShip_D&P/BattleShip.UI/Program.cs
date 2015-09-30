@@ -861,7 +861,18 @@ namespace BattleShip.UI
                     Console.ReadLine();
 
                     //End P2 Carrier
+                    //See if missile fires
+                    Console.WriteLine("{0}, are you ready to fire your first shot?\n\n" +
+                                  "Press enter to continue!", Player1Name);
+                    Console.WriteLine("Enter a coordinate to fire your missile!");
+                    string shotFired = Console.ReadLine();
+                    FireShotResponse p1ShotFired = new FireShotResponse();
 
+                    Coordinate missile1 = Convert(shotFired);
+                    p1ShotFired = Player2Board.FireShot(missile1);
+
+                    Console.WriteLine(p1ShotFired.ShotStatus);
+                    Console.ReadLine();
                 }
 
                 
