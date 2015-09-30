@@ -11,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace BattleShip.UI
 {
-    class Player
+    public class Player
     {
-        public string PlayerName = "";
+        public string Name {get; set;}
+        public Board PlayerBoard = new Board();
+
     }
 }
