@@ -13,8 +13,15 @@ namespace BattleShip.UI
 {
     public class Player
     {
+        public Player()
+        {
+            this.PlayerBoard = new Board();
+        }
+
         public string Name {get; set;}
-        public Board PlayerBoard = new Board();
+
+        public Board PlayerBoard { get; set; }
+
 
     }
 }

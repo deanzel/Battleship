@@ -14,8 +14,8 @@ namespace BattleShip.UI
     internal class Program
     {
         //Converting Coordinate Method
-        public Player Player1 { get; set; }
-        public Player Player2 { get; set; }
+        public static Player Player1 { get; set; }
+        public static Player Player2 { get; set; }
 
     
         public static Coordinate Convert(string InputCoordinate)
@@ -80,19 +80,16 @@ namespace BattleShip.UI
                         InputCoordinate = Console.ReadLine();
                         break;
                 }
-                while (InputCoordinate == "")
-                {
-                    Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
-                    InputCoordinate = Console.ReadLine();
-                }
+                //while (InputCoordinate == "")
+                //{
+                //    Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
+                //    InputCoordinate = Console.ReadLine();
+                //}
                 
-                ValidY = int.TryParse(InputCoordinate.Substring(1), out y);
-                if (y < 1 || y > 10)
-                {
-                    ValidY = false;
-                    Console.WriteLine("Sorry,  that was not a valid coordinate...  Please enter it again.");
-                    InputCoordinate = Console.ReadLine();
-                }
+                ValidY = int.TryParse(InputCoordinate.Substring(1), out y) && (y < 1 || y > 10);
+                if (ValidY) continue;
+                Console.WriteLine("Sorry,  that was not a valid coordinate...  Please enter it again.");
+                InputCoordinate = Console.ReadLine();
             }
 
             return new Coordinate(x, y);
@@ -106,14 +103,14 @@ namespace BattleShip.UI
             string UserResponse = Console.ReadLine().ToUpper();
             bool WantToPlay = false;
 
-            Player Player1 = new Player();
-            Player Player2 = new Player();
+            Player1 = new Player();
+            Player2 = new Player();
 
             //string Player1Name = "";
             //string Player2Name = "";
 
-            Board Player1Board = new Board();
-            Board Player2Board = new Board();
+            //Board Player1Board = new Board();
+            //Board Player2Board = new Board();
 
             while (WantToPlay == false)
             {
@@ -239,7 +236,7 @@ namespace BattleShip.UI
                     //Player 1 setting his or her battleships
 
                     Console.Clear();
-                    Console.WriteLine("{0}, you will now place your 5 battleships: Destroyer (2 coordinates), Submarine (3), Cruiser (3), Battleship (4), Carrier (5).", Player1Name);
+                    Console.WriteLine("{0}, you will now place your 5 battleships: Destroyer (2 coordinates), Submarine (3), Cruiser (3), Battleship (4), Carrier (5).", Player1.Name);
                     Console.ReadLine();
 
 
@@ -298,12 +295,12 @@ namespace BattleShip.UI
                         
 
 
-                        destroyer1IsValid = Player1Board.PlaceShip(requestVarDestroyer1);
+                        destroyer1IsValid = Player1.PlayerBoard.PlaceShip(requestVarDestroyer1);
                         Console.WriteLine(destroyer1IsValid);
                         Console.ReadLine();
                     } while (destroyer1IsValid != ShipPlacement.Ok);
 
-                    Console.WriteLine("Congratulations, {0}! You have placed your Destroyer. Press enter to continue...", Player1Name);
+                    Console.WriteLine("Congratulations, {0}! You have placed your Destroyer. Press enter to continue...", Player1.Name);
                     Console.ReadLine();
 
 
@@ -359,12 +356,12 @@ namespace BattleShip.UI
                         }
                     }
                     
-                        sub1IsValid = Player1Board.PlaceShip(requestVarSub1);
+                        sub1IsValid = Player1.PlayerBoard.PlaceShip(requestVarSub1);
                         Console.WriteLine(sub1IsValid);
                         Console.ReadLine();
                     } while (sub1IsValid != ShipPlacement.Ok);
                     
-                    Console.WriteLine("Congratulations, {0}! You have placed your Submarine. Press enter to continue...", Player1Name);
+                    Console.WriteLine("Congratulations, {0}! You have placed your Submarine. Press enter to continue...", Player1.Name);
                     Console.ReadLine();
 
                     //P1 Cruiser
@@ -421,12 +418,12 @@ namespace BattleShip.UI
                     }
 
                     
-                        cruiser1IsValid = Player1Board.PlaceShip(requestVarCruiser1);
+                        cruiser1IsValid = Player1.PlayerBoard.PlaceShip(requestVarCruiser1);
                         Console.WriteLine(cruiser1IsValid);
                         Console.ReadLine();
                     } while (cruiser1IsValid != ShipPlacement.Ok);
                     
-                    Console.WriteLine("Congratulations, {0}! You have placed your Cruiser. Press enter to continue...", Player1Name);
+                    Console.WriteLine("Congratulations, {0}! You have placed your Cruiser. Press enter to continue...", Player1.Name);
                     Console.ReadLine();
 
                     //P1 Battleship
@@ -481,12 +478,12 @@ namespace BattleShip.UI
                             }
                         }
 
-                        battleship1IsValid = Player1Board.PlaceShip(requestVarBattleship1);
+                        battleship1IsValid = Player1.PlayerBoard.PlaceShip(requestVarBattleship1);
                         Console.WriteLine(battleship1IsValid);
                         Console.ReadLine();
                     } while (battleship1IsValid != ShipPlacement.Ok);
 
-                    Console.WriteLine("Congratulations, {0}! You have placed your Battleship. Press enter to continue...", Player1Name);
+                    Console.WriteLine("Congratulations, {0}! You have placed your Battleship. Press enter to continue...", Player1.Name);
                     Console.ReadLine();
 
                     //End P1 Battleship
@@ -512,7 +509,9 @@ namespace BattleShip.UI
                         Console.WriteLine("{0}, now choose a direction to place your CARRIER (5 coordinates):\n" +
 
                                           "(U)p, (D)own, (L)eft, or (R)ight.", Player1.Name);
-
+                        //int aa = 0;
+                        //ShipType shipType = (ShipType) aa;
+                        //shipType.ToString();
                         bool validCarrier1Direction = false;
                         string carrierP1Direction = Console.ReadLine().ToUpper();
                         while (!validCarrier1Direction)
@@ -543,7 +542,7 @@ namespace BattleShip.UI
                             }
                         }
 
-                        carrier1IsValid = Player1Board.PlaceShip(requestVarCarrier1);
+                        carrier1IsValid = Player1.PlayerBoard.PlaceShip(requestVarCarrier1);
                         Console.WriteLine(carrier1IsValid);
                         Console.ReadLine();
                     } while (carrier1IsValid != ShipPlacement.Ok);
@@ -609,7 +608,7 @@ namespace BattleShip.UI
 
 
 
-                        destroyer2IsValid = Player2Board.PlaceShip(requestVarDestroyer2);
+                        destroyer2IsValid = Player2.PlayerBoard.PlaceShip(requestVarDestroyer2);
                         Console.WriteLine(destroyer2IsValid);
                         Console.ReadLine();
                     } while (destroyer2IsValid != ShipPlacement.Ok);
@@ -671,12 +670,12 @@ namespace BattleShip.UI
                             }
                         }
 
-                        sub2IsValid = Player2Board.PlaceShip(requestVarSub2);
+                        sub2IsValid = Player2.PlayerBoard.PlaceShip(requestVarSub2);
                         Console.WriteLine(sub2IsValid);
                         Console.ReadLine();
                     } while (sub2IsValid != ShipPlacement.Ok);
 
-                    Console.WriteLine("Congratulations, {0}! You have placed your Submarine. Press enter to continue...", Player2Name);
+                    Console.WriteLine("Congratulations, {0}! You have placed your Submarine. Press enter to continue...", Player2.Name);
                     Console.ReadLine();
 
                     //End P2 Submarine
@@ -735,7 +734,7 @@ namespace BattleShip.UI
                         }
 
 
-                        cruiser2IsValid = Player2Board.PlaceShip(requestVarCruiser2);
+                        cruiser2IsValid = Player2.PlayerBoard.PlaceShip(requestVarCruiser2);
                         Console.WriteLine(cruiser2IsValid);
                         Console.ReadLine();
                     } while (cruiser2IsValid != ShipPlacement.Ok);
@@ -797,7 +796,7 @@ namespace BattleShip.UI
                             }
                         }
 
-                        battleship2IsValid = Player2Board.PlaceShip(requestVarBattleship2);
+                        battleship2IsValid = Player2.PlayerBoard.PlaceShip(requestVarBattleship2);
                         Console.WriteLine(battleship2IsValid);
                         Console.ReadLine();
                     } while (battleship2IsValid != ShipPlacement.Ok);
@@ -831,6 +830,8 @@ namespace BattleShip.UI
 
                         bool validCarrier2Direction = false;
                         string carrierP2Direction = Console.ReadLine().ToUpper();
+                        //int[] validCharacters = new[] {32, 11, 45, 2};
+                        //validCharacters.Contains((int)carrierP2Direction.ToUpper().ToCharArray()[0]
                         while (!validCarrier2Direction)
                         {
                             switch (carrierP2Direction)
@@ -859,7 +860,7 @@ namespace BattleShip.UI
                             }
                         }
 
-                        carrier2IsValid = Player2Board.PlaceShip(requestVarCarrier2);
+                        carrier2IsValid = Player2.PlayerBoard.PlaceShip(requestVarCarrier2);
                         Console.WriteLine(carrier2IsValid);
                         Console.ReadLine();
                     } while (carrier2IsValid != ShipPlacement.Ok);
@@ -869,8 +870,14 @@ namespace BattleShip.UI
 
                     //End P2 Carrier
 
+                    Player[] playersArray = new Player[]
+                    {
+                        Player1,
+                        Player2
+                    };
+
                     //STARTING THE GAME!!!!!!!
-                    StartGame(Player1, Player2);
+                    StartGame(playersArray);
 
                     //See if missile fires
                     //Console.WriteLine("{0}, are you ready to fire your first shot?\n\n" +
@@ -901,16 +908,16 @@ namespace BattleShip.UI
 
 
         //GameWorkFlow Start Methods
-        public void StartGame(Player player1, Player player2)
+        public static void StartGame(Player[] players)
         {
-            bool Player1Turn = true;
+            //bool Player1Turn = true;
             
 
 
             do
             {
-                if (Player1Turn)
-                {
+                
+                
                     //P1's turn
                     Console.WriteLine("{0}, are you ready to fire your first shot?\n\n" +
                                   "Press enter to continue!", Player1.Name);
@@ -926,11 +933,9 @@ namespace BattleShip.UI
 
 
 
-                    Player1Turn = false;
-                }
-                else
-                {
-                    //P2's turn
+                   
+                
+                
 
 
 
@@ -940,7 +945,7 @@ namespace BattleShip.UI
 
 
 
-                }
+                
             }
 
             while (p1Shot.Shotstatus != ShotStatus.Victory && p2Shot.ShotStatus != ShotStatus.Victory)
