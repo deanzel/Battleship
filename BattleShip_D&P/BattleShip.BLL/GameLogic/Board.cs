@@ -10,14 +10,16 @@ namespace BattleShip.BLL.GameLogic
     public class Board
     {
         public Dictionary<Coordinate, ShotHistory> ShotHistory;
-        private Ship[] _ships;
+        public Ship[] _ships;
         private int _currentShipIndex;
+        public Dictionary<Coordinate, ShipType> ShipBoard; 
 
         public Board()
         {
             ShotHistory = new Dictionary<Coordinate, ShotHistory>();
             _ships = new Ship[5];
             _currentShipIndex = 0;
+            ShipBoard = new Dictionary<Coordinate, ShipType>();
         }
 
         public FireShotResponse FireShot(Coordinate coordinate)

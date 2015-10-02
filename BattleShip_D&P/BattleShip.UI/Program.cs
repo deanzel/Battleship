@@ -273,34 +273,34 @@ namespace BattleShip.UI
         {
             Console.Clear();
 
-            Console.WriteLine("The BATTLESHIP board looks something like this,\n" +
+            //Console.WriteLine("The BATTLESHIP board looks something like this,\n" +
 
-                              "so please enter any coordinates in the form of letter number pairs,\n" +
+            //                  "so please enter any coordinates in the form of letter number pairs,\n" +
 
-                              "from A to J and 1 to 10, such as B8, or G3...");
+            //                  "from A to J and 1 to 10, such as B8, or G3...");
 
-            string[] yaxis = new string[]
+            //string[] yaxis = new string[]
 
-            {
+            //{
 
-                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+            //    "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
 
-            };
+            //};
 
 
-            Console.WriteLine("\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n");
+            //Console.WriteLine("\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n");
 
-            for (int i = 0; i < 10; i++)
+            //for (int i = 0; i < 10; i++)
 
-            {
+            //{
 
-                Console.WriteLine("{0}\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\n", yaxis[i]);
+            //    Console.WriteLine("{0}\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\n", yaxis[i]);
 
-            }
+            //}
 
-            Console.WriteLine(
-                "When you think you've got it, press enter to continue on to placing your battleships...");
-            Console.ReadLine();
+            //Console.WriteLine(
+            //    "When you think you've got it, press enter to continue on to placing your battleships...");
+            //Console.ReadLine();
 
 
             //for loop to setup board
@@ -340,7 +340,8 @@ namespace BattleShip.UI
                     do
                     {
                         Console.Clear();
-                        Console.WriteLine("{0}, get ready to place your {1} ({2} coordinates)", players[p].Name,
+                        DrawShipPlacement(players[p]);
+                        Console.WriteLine("\n{0}, get ready to place your {1} ({2} coordinates)", players[p].Name,
                             shipType.ToString(), shipLength);
                         Console.WriteLine(
                             "First, choose an initial coordinate (alphanumeric) within the 10x10 grid for your ship.\nWe will ask for the direction/orientation of the ship afterward.");
@@ -394,7 +395,18 @@ namespace BattleShip.UI
 
                     } while (placementIsValid != ShipPlacement.Ok);
 
-                    Console.WriteLine("Congratulations, {0}! You have placed your {1}. Press enter to continue...",
+                    //Adding ship to ShipBoard Dictionary
+                    Ship shipToDraw = players[p].PlayerBoard._ships[s];
+
+                    foreach (Coordinate shipCoord in shipToDraw.BoardPositions)
+                    {
+                        players[p].PlayerBoard.ShipBoard.Add(shipCoord, shipToDraw.ShipType);
+                    }
+
+                    Console.Clear();
+                    DrawShipPlacement(players[p]);
+
+                    Console.WriteLine("\nCongratulations, {0}! You have placed your {1}. Press enter to continue...",
                         players[p].Name, shipType.ToString());
                     Console.ReadLine();
                 }
@@ -402,6 +414,50 @@ namespace BattleShip.UI
         }
 
 
+        //DrawShipPlacement Method
+
+        public static void DrawShipPlacement(Player player)
+        {
+            Console.WriteLine("\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n");
+            for (int y = 1; y < 11; y++)
+            {
+                Console.Write("{0}", y);
+                for (int x = 1; x < 11; x++)
+                {
+                    Coordinate coord = new Coordinate(x, y);
+                    ShipType boardVar;
+                    if (player.PlayerBoard.ShipBoard.TryGetValue(coord, out boardVar))
+                    {
+                        switch (boardVar)
+                        {
+                            case ShipType.Destroyer:
+                                Console.Write("\tD");
+                                break;
+                            case ShipType.Submarine:
+                                Console.Write("\tS");
+                                break;
+                            case ShipType.Cruiser:
+                                Console.Write("\tR");
+                                break;
+                            case ShipType.Battleship:
+                                Console.Write("\tB");
+                                break;
+                            case ShipType.Carrier:
+                                Console.Write("\tC");
+                                break;
+                            default:
+                                Console.Write("\t.");
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.Write("\t.");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
 
 
 
@@ -538,7 +594,7 @@ namespace BattleShip.UI
                         Console.Write("\t~");
                         Console.ResetColor();
                     }
-                    //Console.WriteLine();
+                    
                 }
                 Console.WriteLine();
             }
