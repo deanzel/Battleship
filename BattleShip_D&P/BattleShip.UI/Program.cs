@@ -183,9 +183,10 @@ namespace BattleShip.UI
 
         public static void Main(string[] args)
         {
+            string UserResponse = "";
             Console.WriteLine(
                 "Weclome to Battleship by Dean & Patrick!!\nDo you want to play Battleship? Yes (Y) or No (N)?");
-            string UserResponse = Console.ReadLine().ToUpper();
+            UserResponse = Console.ReadLine().ToUpper();
             bool WantToPlay = false;
 
             Player1 = new Player();
@@ -303,7 +304,7 @@ namespace BattleShip.UI
                 {
                     Console.Clear();
                     Console.WriteLine("Invalid Reponse. Do you want to play Battleship? Type Y or N.");
-                    UserResponse = Console.ReadLine();
+                    UserResponse = Console.ReadLine().ToUpper();
                 }
             }
         }
@@ -500,17 +501,22 @@ namespace BattleShip.UI
                         {
                             Console.WriteLine("That is a duplicate shot. We will have to take in a new coordinate.");
                             Console.ReadLine();
+                            Console.Clear();
                         }
                     } while (playerShotFired.ShotStatus == ShotStatus.Duplicate);
 
 
                     Console.WriteLine("That was a {0}!", playerShotFired.ShotStatus);
+                    if (playerShotFired.ShotStatus == ShotStatus.Victory)
+                        break;
                     Console.ReadLine();
                     Console.WriteLine("It is now the next player's turn. Press enter to continue.");
                     Console.ReadLine();
                     Console.Clear();
+                    
                 }
 
+                
             }
 
             if (player1Turn == false)
@@ -560,7 +566,9 @@ namespace BattleShip.UI
                     }
                     else
                     {
-                        Console.Write("\t_");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("\t~");
+                        Console.ResetColor();
                     }
                     //Console.WriteLine();
                 }
