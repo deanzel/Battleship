@@ -389,7 +389,21 @@ namespace BattleShip.UI
                             }
                         }
                         placementIsValid = players[p].PlayerBoard.PlaceShip(requestShip);
-                        Console.WriteLine(placementIsValid);
+
+                        switch (placementIsValid)
+                        {
+                            case ShipPlacement.NotEnoughSpace:
+                                Console.WriteLine("There is not enough space to place the ship there. Try again.");
+                                break;
+                                case ShipPlacement.Overlap:
+                                Console.WriteLine("The ship is overlapping with a previously placed ship. Try again.");
+                                break;
+                            default:
+                                Console.WriteLine("That ship placement is OK!!");
+                                break;
+                        }
+
+                        //Console.WriteLine(placementIsValid);
                         Console.ReadLine();
 
 
