@@ -102,84 +102,6 @@ namespace BattleShip.UI
             return new Coordinate(x, y);
         }
 
-        //int x = 0;
-        //int y = 0;
-        //bool ValidX = false;
-        //bool ValidY = false;
-
-
-        //while (!ValidX || !ValidY)
-        //{
-        //    while (InputCoordinate == "")
-        //    {
-        //        Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
-        //        InputCoordinate = Console.ReadLine();
-        //    }
-        //    switch (InputCoordinate.Substring(0, 1).ToUpper())
-        //    {
-        //        case "A":
-        //            x = 1;
-        //            ValidX = true;
-        //            break;
-        //        case "B":
-        //            x = 2;
-        //            ValidX = true;
-        //            break;
-        //        case "C":
-        //            x = 3;
-        //            ValidX = true;
-        //            break;
-        //        case "D":
-        //            x = 4;
-        //            ValidX = true;
-        //            break;
-        //        case "E":
-        //            x = 5;
-        //            ValidX = true;
-        //            break;
-        //        case "F":
-        //            x = 6;
-        //            ValidX = true;
-        //            break;
-        //        case "G":
-        //            x = 7;
-        //            ValidX = true;
-        //            break;
-        //        case "H":
-        //            x = 8;
-        //            ValidX = true;
-        //            break;
-        //        case "I":
-        //            x = 9;
-        //            ValidX = true;
-        //            break;
-        //        case "J":
-        //            x = 10;
-        //            ValidX = true;
-        //            break;
-        //        default:
-        //            Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
-        //            InputCoordinate = Console.ReadLine();
-        //            break;
-        //    }
-        //    //while (InputCoordinate == "")
-        //    //{
-        //    //    Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
-        //    //    InputCoordinate = Console.ReadLine();
-        //    //}
-
-        //    ValidY = int.TryParse(InputCoordinate.Substring(1), out y) && (y < 1 || y > 10);
-        //    if (ValidY) continue;
-        //    Console.WriteLine("Sorry,  that was not a valid coordinate...  Please enter it again.");
-        //    InputCoordinate = Console.ReadLine();
-        //}
-
-        //return new Coordinate(x, y);
-
-
-
-
-
 
         public static void Main(string[] args)
         {
@@ -191,6 +113,8 @@ namespace BattleShip.UI
 
             Player1 = new Player();
             Player2 = new Player();
+
+            bool keepPlaying = true;
 
             Player[] playersArray = new Player[]
                     {
@@ -286,14 +210,47 @@ namespace BattleShip.UI
                         }
                     }
 
+                    
 
-                    //New SetBoard method
-                    SetBoard(playersArray);
+                    while (keepPlaying)
+                    {
+                        //New SetBoard method
+                        SetBoard(playersArray);
 
-                    //STARTING THE GAME!!!!!!!
-                    StartGame(playersArray);
+                        //STARTING THE GAME!!!!!!!
+                        StartGame(playersArray);
 
-                   
+
+                        //Play a new game loop conditions
+                    
+                        Console.WriteLine("\nDo you want to play another game? Enter (Y)es or (N)o.");
+                        string wantToPlay = Console.ReadLine().ToUpper();
+                        bool validWantToPlayResponse = false;
+
+                        while (!validWantToPlayResponse)
+                        {
+                            switch (wantToPlay)
+                            {
+                                case "Y":
+                                    Console.WriteLine("You will now play a new game. Get ready to set your new boards.");
+                                    Console.ReadLine();
+                                    validWantToPlayResponse = true;
+                                    break;
+                                case "N":
+                                    Console.WriteLine("OK. Goodbye.");
+                                    Console.ReadLine();
+                                    validWantToPlayResponse = true;
+                                    keepPlaying = false;
+                                    break;
+                                default:
+                                    Console.WriteLine(
+                                        "That is not a valid response. Do you want to play another game? (Y)es or (N)o.");
+                                    wantToPlay = Console.ReadLine().ToUpper();
+                                    break;
+                            }
+                        }
+                    }
+
                 }
 
 
@@ -480,8 +437,7 @@ namespace BattleShip.UI
                             DrawBoard(players[0]);
                         }
 
-                        Console.WriteLine("{0}, get ready to fire your shot?\n\n" +
-                                          "Press enter to continue!", players[i].Name);
+                        Console.WriteLine("{0}, get ready to fire your shot?\n", players[i].Name);
                         Console.WriteLine("Enter a coordinate to fire your missile!");
                         string shotFired = Console.ReadLine();
                         Coordinate missle = Convert(shotFired);
@@ -506,11 +462,23 @@ namespace BattleShip.UI
                     } while (playerShotFired.ShotStatus == ShotStatus.Duplicate);
 
 
-                    Console.WriteLine("That was a {0}!", playerShotFired.ShotStatus);
+                    switch (playerShotFired.ShotStatus)
+                    {
+                        case ShotStatus.Hit:
+                            Console.WriteLine("You hit something!");
+                            break;
+                            case ShotStatus.Miss:
+                                Console.WriteLine("Your projectile splashes into the ocean, you missed!");
+                            break;
+                            case ShotStatus.HitAndSunk:
+                                Console.WriteLine("You sank your opponent's {0}.", playerShotFired.ShipImpacted);
+                            break;
+                    }
+                    
                     if (playerShotFired.ShotStatus == ShotStatus.Victory)
                         break;
-                    Console.ReadLine();
-                    Console.WriteLine("It is now the next player's turn. Press enter to continue.");
+                    
+                    Console.WriteLine("\nIt is now the next player's turn. Press enter to continue to the next screen.");
                     Console.ReadLine();
                     Console.Clear();
                     
@@ -529,7 +497,7 @@ namespace BattleShip.UI
                 Console.WriteLine("{0} has won the game!!", players[1].Name);
                 Console.ReadLine();
             }
-
+        
             Console.ReadLine();
         }
 
@@ -537,10 +505,10 @@ namespace BattleShip.UI
         public static void DrawBoard(Player player)
         {
 
-            Console.WriteLine("\t\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n");
+            Console.WriteLine("\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n");
             for (int y = 1; y < 11; y++)
             {
-                Console.Write("{0}\t", y);
+                Console.Write("{0}", y);
                 for (int x = 1; x < 11; x++)
                 {
                     Coordinate coord = new Coordinate(x, y);
