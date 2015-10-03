@@ -117,10 +117,10 @@ namespace BattleShip.UI
             bool keepPlaying = true;
 
             Player[] playersArray = new Player[]
-                    {
-                        Player1,
-                        Player2
-                    };
+            {
+                Player1,
+                Player2
+            };
 
             while (WantToPlay == false)
             {
@@ -154,7 +154,7 @@ namespace BattleShip.UI
 
 
                         //Play a new game loop conditions
-                    
+
                         Console.WriteLine("\nDo you want to play another game? Enter (Y)es or (N)o.");
                         string wantToPlay = Console.ReadLine().ToUpper();
                         bool validWantToPlayResponse = false;
@@ -274,7 +274,7 @@ namespace BattleShip.UI
         public static void SetBoard(Player[] players)
         {
             Console.Clear();
-            
+
             for (int p = 0; p < players.Length; p++)
             {
                 Console.Clear();
@@ -311,10 +311,10 @@ namespace BattleShip.UI
                     {
                         Console.Clear();
                         DrawShipPlacement(players[p]);
-                        Console.WriteLine("\n{0}, get ready to place your {1} ({2} coordinates)", players[p].Name,
+                        Console.WriteLine("\n\n\n{0}, get ready to place your {1} ({2} coordinates)", players[p].Name,
                             shipType.ToString(), shipLength);
                         Console.WriteLine(
-                            "First, choose an initial coordinate (alphanumeric) within the 10x10 grid for your ship.\nWe will ask for the direction/orientation of the ship afterward.");
+                            "\nFirst, choose an initial coordinate (alphanumeric) within the 10x10 grid for your ship.\n\nWe will ask for the direction/orientation of the ship afterward.");
 
                         string coordString = Console.ReadLine();
                         Coordinate baseCoord = Convert(coordString);
@@ -365,7 +365,7 @@ namespace BattleShip.UI
                             case ShipPlacement.NotEnoughSpace:
                                 Console.WriteLine("There is not enough space to place the ship there. Try again.");
                                 break;
-                                case ShipPlacement.Overlap:
+                            case ShipPlacement.Overlap:
                                 Console.WriteLine("The ship is overlapping with a previously placed ship. Try again.");
                                 break;
                             default:
@@ -390,7 +390,7 @@ namespace BattleShip.UI
                     Console.Clear();
                     DrawShipPlacement(players[p]);
 
-                    Console.WriteLine("\nCongratulations, {0}! You have placed your {1}. Press enter to continue...",
+                    Console.WriteLine("\n\nCongratulations, {0}! You have placed your {1}. Press enter to continue...",
                         players[p].Name, shipType.ToString());
                     Console.ReadLine();
                 }
@@ -402,10 +402,10 @@ namespace BattleShip.UI
 
         public static void DrawShipPlacement(Player player)
         {
-            Console.WriteLine("\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n");
-            for (int y = 1; y < 11; y++)
+            Console.WriteLine("     A   B   C   D   E   F   G   H   I   J\n");
+            for (int y = 1; y < 10; y++)
             {
-                Console.Write("{0}", y);
+                Console.Write("{0} ", y);
                 for (int x = 1; x < 11; x++)
                 {
                     Coordinate coord = new Coordinate(x, y);
@@ -415,31 +415,68 @@ namespace BattleShip.UI
                         switch (boardVar)
                         {
                             case ShipType.Destroyer:
-                                Console.Write("\tD");
+                                Console.Write("   D");
                                 break;
                             case ShipType.Submarine:
-                                Console.Write("\tS");
+                                Console.Write("   S");
                                 break;
                             case ShipType.Cruiser:
-                                Console.Write("\tR");
+                                Console.Write("   R");
                                 break;
                             case ShipType.Battleship:
-                                Console.Write("\tB");
+                                Console.Write("   B");
                                 break;
                             case ShipType.Carrier:
-                                Console.Write("\tC");
+                                Console.Write("   C");
                                 break;
                             default:
-                                Console.Write("\t.");
+                                Console.Write("  .");
                                 break;
                         }
                     }
                     else
                     {
-                        Console.Write("\t.");
+                        Console.Write("   .");
                     }
                 }
-                Console.WriteLine();
+                Console.WriteLine("\n");
+            }
+
+            //Insert y = 10 line
+
+            Console.Write("10");
+            for (int x = 1; x < 11; x++)
+            {
+                Coordinate coord = new Coordinate(x, 10);
+                ShipType boardVar;
+                if (player.PlayerBoard.ShipBoard.TryGetValue(coord, out boardVar))
+                {
+                    switch (boardVar)
+                    {
+                        case ShipType.Destroyer:
+                            Console.Write("   D");
+                            break;
+                        case ShipType.Submarine:
+                            Console.Write("   S");
+                            break;
+                        case ShipType.Cruiser:
+                            Console.Write("   R");
+                            break;
+                        case ShipType.Battleship:
+                            Console.Write("   B");
+                            break;
+                        case ShipType.Carrier:
+                            Console.Write("   C");
+                            break;
+                        default:
+                            Console.Write("   .");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.Write("   .");
+                }
             }
         }
 
@@ -478,7 +515,7 @@ namespace BattleShip.UI
                         }
 
                         Console.WriteLine("{0}, get ready to fire your shot?\n", players[i].Name);
-                        Console.WriteLine("Enter a coordinate to fire your missile!");
+                        Console.WriteLine("Enter a coordinate to fire your missile!\n");
                         string shotFired = Console.ReadLine();
                         Coordinate missle = Convert(shotFired);
                         //FireShotResponse playerShotFired = new FireShotResponse();
@@ -495,7 +532,7 @@ namespace BattleShip.UI
                         }
                         if (playerShotFired.ShotStatus == ShotStatus.Duplicate)
                         {
-                            Console.WriteLine("That is a duplicate shot. We will have to take in a new coordinate.");
+                            Console.WriteLine("\nThat is a duplicate shot. We will have to take in a new coordinate.\nPress Enter to continue...");
                             Console.ReadLine();
                             Console.Clear();
                         }
@@ -505,39 +542,39 @@ namespace BattleShip.UI
                     switch (playerShotFired.ShotStatus)
                     {
                         case ShotStatus.Hit:
-                            Console.WriteLine("You hit something!");
+                            Console.WriteLine("\nYou hit something!");
                             break;
-                            case ShotStatus.Miss:
-                                Console.WriteLine("Your projectile splashes into the ocean, you missed!");
+                        case ShotStatus.Miss:
+                            Console.WriteLine("\nYour projectile splashes into the ocean, you missed!");
                             break;
-                            case ShotStatus.HitAndSunk:
-                                Console.WriteLine("You sank your opponent's {0}.", playerShotFired.ShipImpacted);
+                        case ShotStatus.HitAndSunk:
+                            Console.WriteLine("\nYou sank your opponent's {0}!", playerShotFired.ShipImpacted);
                             break;
                     }
-                    
+
                     if (playerShotFired.ShotStatus == ShotStatus.Victory)
                         break;
-                    
-                    Console.WriteLine("\nIt is now the next player's turn. Press enter to continue to the next screen.");
+
+                    Console.WriteLine("\nIt is now the next player's turn. Press enter to clear the screen and continue to the next turn.");
                     Console.ReadLine();
                     Console.Clear();
-                    
+
                 }
 
-                
+
             }
 
             if (player1Turn == false)
             {
-                Console.WriteLine("{0} has won the game!!", players[0].Name);
+                Console.WriteLine("\n\n{0} has won the game!! Congratulations.", players[0].Name);
                 Console.ReadLine();
             }
             else
             {
-                Console.WriteLine("{0} has won the game!!", players[1].Name);
+                Console.WriteLine("\n\n{0} has won the game!! Congratulations.", players[1].Name);
                 Console.ReadLine();
             }
-        
+
             Console.ReadLine();
         }
 
@@ -545,10 +582,10 @@ namespace BattleShip.UI
         public static void DrawBoard(Player player)
         {
 
-            Console.WriteLine("\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n");
-            for (int y = 1; y < 11; y++)
+            Console.WriteLine("     A   B   C   D   E   F   G   H   I   J\n");
+            for (int y = 1; y < 10; y++)
             {
-                Console.Write("{0}", y);
+                Console.Write("{0} ", y);
                 for (int x = 1; x < 11; x++)
                 {
                     Coordinate coord = new Coordinate(x, y);
@@ -559,29 +596,62 @@ namespace BattleShip.UI
                         {
                             case ShotHistory.Hit:
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.Write("\tH");
+                                Console.Write("   H");
                                 Console.ResetColor();
                                 break;
                             case ShotHistory.Miss:
                                 Console.ForegroundColor = ConsoleColor.Yellow;
-                                Console.Write("\tM");
+                                Console.Write("   M");
                                 Console.ResetColor();
                                 break;
                             default:
-                                Console.Write("\t.");
+                                Console.Write("   .");
                                 break;
                         }
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.Write("\t~");
+                        Console.Write("   ~");
                         Console.ResetColor();
                     }
-                    
+
                 }
-                Console.WriteLine();
+                Console.WriteLine("\n");
             }
+
+            Console.Write("10");
+            for (int x = 1; x < 11; x++)
+            {
+                Coordinate coord = new Coordinate(x, 10);
+                ShotHistory history;
+                if (player.PlayerBoard.ShotHistory.TryGetValue(coord, out history))
+                {
+                    switch (history)
+                    {
+                        case ShotHistory.Hit:
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("   H");
+                            Console.ResetColor();
+                            break;
+                        case ShotHistory.Miss:
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write("   M");
+                            Console.ResetColor();
+                            break;
+                        default:
+                            Console.Write("   .");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("   ~");
+                    Console.ResetColor();
+                }
+            }
+            Console.WriteLine("\n\n");
         }
     }
 }
