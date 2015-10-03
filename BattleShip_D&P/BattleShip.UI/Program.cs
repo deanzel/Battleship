@@ -141,76 +141,8 @@ namespace BattleShip.UI
 
                     //PromptName() method
 
+                    PromptName(playersArray);
 
-                    bool player1NameOK = false;
-                    bool player2NameOK = false;
-
-
-                    Console.Clear();
-                    Console.WriteLine("Player 1, please enter your desired name.");
-                    Player1.Name = Console.ReadLine();
-
-                    while (player1NameOK == false)
-                    {
-                        Console.WriteLine("{0} is what we will call Player 1. Continue? Y or N.", Player1.Name);
-                        string NameResponse1 = Console.ReadLine().ToUpper();
-
-                        while (NameResponse1 != "N" && NameResponse1 != "Y")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Didn't get that. Is {0} what we will call Player 1? Y or N.",
-                                Player1.Name);
-                            NameResponse1 = Console.ReadLine().ToUpper();
-                        }
-
-                        while (NameResponse1 == "N")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Player 1, please enter your new desired name.");
-                            Player1.Name = Console.ReadLine();
-                            Console.WriteLine("{0} is what we will call Player 1. Continue? Y or N.", Player1.Name);
-                            NameResponse1 = Console.ReadLine().ToUpper();
-                        }
-
-                        if (NameResponse1 == "Y")
-                        {
-                            player1NameOK = true;
-                        }
-                    }
-
-                    Console.Clear();
-                    Console.WriteLine("Player 2, please enter your desired name.");
-                    Player2.Name = Console.ReadLine();
-
-                    while (player2NameOK == false)
-                    {
-                        Console.WriteLine("{0} is what we will call Player 2. Continue? Y or N.", Player2.Name);
-                        string NameResponse2 = Console.ReadLine().ToUpper();
-
-                        while (NameResponse2 != "N" && NameResponse2 != "Y")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Didn't get that. Is {0} what we will call Player 2? Y or N.",
-                                Player2.Name);
-                            NameResponse2 = Console.ReadLine().ToUpper();
-                        }
-
-                        while (NameResponse2 == "N")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Player 2, please enter your new desired name.");
-                            Player2.Name = Console.ReadLine();
-                            Console.WriteLine("{0} is what we will call Player 2. Continue? Y or N.", Player2.Name);
-                            NameResponse2 = Console.ReadLine().ToUpper();
-                        }
-
-                        if (NameResponse2 == "Y")
-                        {
-                            player2NameOK = true;
-                        }
-                    }
-
-                    
 
                     while (keepPlaying)
                     {
@@ -266,45 +198,83 @@ namespace BattleShip.UI
             }
         }
 
+        //PromptName method
+        public static void PromptName(Player[] players)
+        {
+            bool player1NameOK = false;
+            bool player2NameOK = false;
 
+
+            Console.Clear();
+            Console.WriteLine("Player 1, please enter your desired name.");
+            Player1.Name = Console.ReadLine();
+
+            while (player1NameOK == false)
+            {
+                Console.WriteLine("{0} is what we will call Player 1. Continue? Y or N.", Player1.Name);
+                string NameResponse1 = Console.ReadLine().ToUpper();
+
+                while (NameResponse1 != "N" && NameResponse1 != "Y")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Didn't get that. Is {0} what we will call Player 1? Y or N.",
+                        Player1.Name);
+                    NameResponse1 = Console.ReadLine().ToUpper();
+                }
+
+                while (NameResponse1 == "N")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Player 1, please enter your new desired name.");
+                    Player1.Name = Console.ReadLine();
+                    Console.WriteLine("{0} is what we will call Player 1. Continue? Y or N.", Player1.Name);
+                    NameResponse1 = Console.ReadLine().ToUpper();
+                }
+
+                if (NameResponse1 == "Y")
+                {
+                    player1NameOK = true;
+                }
+            }
+
+            Console.Clear();
+            Console.WriteLine("Player 2, please enter your desired name.");
+            Player2.Name = Console.ReadLine();
+
+            while (player2NameOK == false)
+            {
+                Console.WriteLine("{0} is what we will call Player 2. Continue? Y or N.", Player2.Name);
+                string NameResponse2 = Console.ReadLine().ToUpper();
+
+                while (NameResponse2 != "N" && NameResponse2 != "Y")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Didn't get that. Is {0} what we will call Player 2? Y or N.",
+                        Player2.Name);
+                    NameResponse2 = Console.ReadLine().ToUpper();
+                }
+
+                while (NameResponse2 == "N")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Player 2, please enter your new desired name.");
+                    Player2.Name = Console.ReadLine();
+                    Console.WriteLine("{0} is what we will call Player 2. Continue? Y or N.", Player2.Name);
+                    NameResponse2 = Console.ReadLine().ToUpper();
+                }
+
+                if (NameResponse2 == "Y")
+                {
+                    player2NameOK = true;
+                }
+            }
+        }
 
         //New SetBoard Method
         public static void SetBoard(Player[] players)
         {
             Console.Clear();
-
-            //Console.WriteLine("The BATTLESHIP board looks something like this,\n" +
-
-            //                  "so please enter any coordinates in the form of letter number pairs,\n" +
-
-            //                  "from A to J and 1 to 10, such as B8, or G3...");
-
-            //string[] yaxis = new string[]
-
-            //{
-
-            //    "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
-
-            //};
-
-
-            //Console.WriteLine("\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ\n");
-
-            //for (int i = 0; i < 10; i++)
-
-            //{
-
-            //    Console.WriteLine("{0}\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\t_|\n", yaxis[i]);
-
-            //}
-
-            //Console.WriteLine(
-            //    "When you think you've got it, press enter to continue on to placing your battleships...");
-            //Console.ReadLine();
-
-
-            //for loop to setup board
-
+            
             for (int p = 0; p < players.Length; p++)
             {
                 Console.Clear();
