@@ -443,7 +443,9 @@ namespace BattleShip.UI
                     }
                     else
                     {
-                        Console.Write("   .");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("   ~");
+                        Console.ResetColor();
                     }
                 }
                 Console.WriteLine("\n");
@@ -476,13 +478,17 @@ namespace BattleShip.UI
                             Console.Write("   C");
                             break;
                         default:
-                            Console.Write("   .");
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write("   ~");
+                            Console.ResetColor();
                             break;
                     }
                 }
                 else
                 {
-                    Console.Write("   .");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("   ~");
+                    Console.ResetColor();
                 }
             }
         }
