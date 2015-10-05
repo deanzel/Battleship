@@ -63,7 +63,8 @@ namespace BattleShip.BLL.GameLogic
             foreach (var ship in _ships)
             {
                 // no need to check sunk ships
-                if (ship.IsSunk)
+
+               if (ship.IsSunk)
                     continue;
 
                 ShotStatus status = ship.FireAtShip(coordinate);

@@ -16,6 +16,7 @@ namespace BattleShip.UI
     internal class Program
     {
         //Converting Coordinate Method
+
         public static Player Player1 { get; set; }
         public static Player Player2 { get; set; }
 
@@ -91,6 +92,8 @@ namespace BattleShip.UI
                 ValidY = int.TryParse(InputCoordinate.Substring(1), out y);
                 if (y < 1 || y > 10)
                 {
+                    //testing
+                    ValidX = false;
                     ValidY = false;
 
                     Console.WriteLine("Sorry,  that was not a valid coordinate...  Please enter it again.");
@@ -166,6 +169,8 @@ namespace BattleShip.UI
                                 case "Y":
                                     Console.WriteLine("You will now play a new game. Get ready to set your new boards.");
                                     Console.ReadLine();
+                                    Player1.PlayerBoard = new Board();
+                                    Player2.PlayerBoard = new Board();
                                     validWantToPlayResponse = true;
                                     break;
                                 case "N":
@@ -430,7 +435,9 @@ namespace BattleShip.UI
                                 Console.Write("   C");
                                 break;
                             default:
-                                Console.Write("  .");
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.Write("  ~");
+                                Console.ResetColor();
                                 break;
                         }
                     }
@@ -532,7 +539,8 @@ namespace BattleShip.UI
                         }
                         if (playerShotFired.ShotStatus == ShotStatus.Duplicate)
                         {
-                            Console.WriteLine("\nThat is a duplicate shot. We will have to take in a new coordinate.\nPress Enter to continue...");
+                            Console.WriteLine(
+                                "\nThat is a duplicate shot. We will have to take in a new coordinate.\nPress Enter to continue...");
                             Console.ReadLine();
                             Console.Clear();
                         }
@@ -555,7 +563,8 @@ namespace BattleShip.UI
                     if (playerShotFired.ShotStatus == ShotStatus.Victory)
                         break;
 
-                    Console.WriteLine("\nIt is now the next player's turn. Press enter to clear the screen and continue to the next turn.");
+                    Console.WriteLine(
+                        "\nIt is now the next player's turn. Press enter to clear the screen and continue to the next turn.");
                     Console.ReadLine();
                     Console.Clear();
 
@@ -605,7 +614,9 @@ namespace BattleShip.UI
                                 Console.ResetColor();
                                 break;
                             default:
-                                Console.Write("   .");
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.Write("   ~");
+                                Console.ResetColor();
                                 break;
                         }
                     }
