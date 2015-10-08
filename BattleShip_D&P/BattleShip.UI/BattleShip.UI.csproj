@@ -41,10 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameWorkFlow.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="PromptName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

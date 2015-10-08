@@ -83,11 +83,11 @@ namespace BattleShip.UI
                         InputCoordinate = Console.ReadLine();
                         break;
                 }
-                while (InputCoordinate == "")
-                {
-                    Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
-                    InputCoordinate = Console.ReadLine();
-                }
+                //while (InputCoordinate == "")
+                //{
+                //    Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
+                //    InputCoordinate = Console.ReadLine();
+                //}
 
                 ValidY = int.TryParse(InputCoordinate.Substring(1), out y);
                 if (y < 1 || y > 10)
@@ -109,8 +109,19 @@ namespace BattleShip.UI
         public static void Main(string[] args)
         {
             string UserResponse = "";
-            Console.WriteLine(
-                "Weclome to Battleship by Dean & Patrick!!\nDo you want to play Battleship? Yes (Y) or No (N)?");
+            Console.WriteLine("Weclome to Battleship by Dean & Patrick!!\n\n");
+            Console.WriteLine(@"                                       # #  ( )");
+            Console.WriteLine(@"                                  ___#_#___|__");
+            Console.WriteLine(@"                              _  |____________|  _");
+            Console.WriteLine(@"                       _=====| | |            | | |==== _");
+            Console.WriteLine(@"                 =====| |.---------------------------. | |====");
+            Console.WriteLine(@"   <--------------------'   .  .  .  .  .  .  .  .   '--------------/");
+            Console.WriteLine(@"     \                                                             /");
+            Console.WriteLine(@"      \______________________________________________DCPB_________/");
+            Console.WriteLine(@"  wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+            Console.WriteLine(@"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+            Console.WriteLine(@"   wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+            Console.WriteLine("\n\nDo you want to play Battleship? Yes (Y) or No (N)?");
             UserResponse = Console.ReadLine().ToUpper();
             bool WantToPlay = false;
 
@@ -499,13 +510,7 @@ namespace BattleShip.UI
         //GameWorkFlow Start Methods
         public static void StartGame(Player[] players)
         {
-            //bool Player1Turn = true;
-
-            //while loop no ShotStatus.Victory
-
-            //for cycling through players turns from 1 to 2
-            // for (int i = 0; i < players.Length; i++)
-            //put in turns
+            
             Console.Clear();
 
             bool player1Turn = false;
@@ -567,26 +572,39 @@ namespace BattleShip.UI
                     }
 
                     if (playerShotFired.ShotStatus == ShotStatus.Victory)
+                    {
+                        Console.WriteLine("You sank your opponent't {0}, the final ship!!", playerShotFired.ShipImpacted);
                         break;
-
+                    }
                     Console.WriteLine(
                         "\nIt is now the next player's turn. Press enter to clear the screen and continue to the next turn.");
                     Console.ReadLine();
                     Console.Clear();
-
                 }
-
-
             }
 
             if (player1Turn == false)
             {
-                Console.WriteLine("\n\n{0} has won the game!! Congratulations.", players[0].Name);
+                Console.WriteLine("\n\n{0} has won the game and beaten {1}!! Congratulations.", players[0].Name, players[1].Name);
+                Console.WriteLine(@"  ______                       _____");
+                Console.WriteLine(@" / _____)                     / ___ \\");
+                Console.WriteLine(@"| /  ___  ____ ____   ____   | |   | |_   _ ____  ____");
+                Console.WriteLine(@"| | (___)/ _  |    \ / _  )  | |   | | | | / _  )/ ___)");
+                Console.WriteLine(@"| \____/( ( | | | | ( (/ /   | |___| |\ V ( (/ /| |");
+                Console.WriteLine(@" \_____/ \_||_|_|_|_|\____)   \_____/  \_/ \____)_|");
+                Console.WriteLine();
                 Console.ReadLine();
             }
             else
             {
-                Console.WriteLine("\n\n{0} has won the game!! Congratulations.", players[1].Name);
+                Console.WriteLine("\n\n{0} has won the game and beaten {1}!! Congratulations.", players[1].Name, players[0].Name);
+                Console.WriteLine(@"  ______                       _____");
+                Console.WriteLine(@" / _____)                     / ___ \\");
+                Console.WriteLine(@"| /  ___  ____ ____   ____   | |   | |_   _ ____  ____");
+                Console.WriteLine(@"| | (___)/ _  |    \ / _  )  | |   | | | | / _  )/ ___)");
+                Console.WriteLine(@"| \____/( ( | | | | ( (/ /   | |___| |\ V ( (/ /| |");
+                Console.WriteLine(@" \_____/ \_||_|_|_|_|\____)   \_____/  \_/ \____)_|");
+                Console.WriteLine();
                 Console.ReadLine();
             }
 
