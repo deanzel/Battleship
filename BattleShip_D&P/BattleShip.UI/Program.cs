@@ -83,11 +83,11 @@ namespace BattleShip.UI
                         InputCoordinate = Console.ReadLine();
                         break;
                 }
-                //while (InputCoordinate == "")
-                //{
-                //    Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
-                //    InputCoordinate = Console.ReadLine();
-                //}
+                while (InputCoordinate == "")
+                {
+                    Console.WriteLine("Sorry, that was not a valid coordinate... Please enter it again.");
+                    InputCoordinate = Console.ReadLine();
+                }
 
                 ValidY = int.TryParse(InputCoordinate.Substring(1), out y);
                 if (y < 1 || y > 10)
